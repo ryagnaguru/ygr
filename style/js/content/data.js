@@ -1,4 +1,5 @@
 const categories = {
+  0:"All",
   1:"Technology",
 }
 const articleInfos = [{

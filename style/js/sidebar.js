@@ -49,14 +49,14 @@ let init = () => {
 }
 
 let getPopularList = () => {
-  for (const {heading, img, date, colorClass, category, desc, article} of articleInfos) {
+  for (const {heading, img, date, colorClass, category, article} of articleInfos) {
     $("#popularPost").append(`
     <li>
     <figure class="overlay small"> <a href=${article}><img src=${img} alt="" /> </a> </figure>
     <div class="post-content">
     <h4 class="post-title"> <a href=${article}>${heading}</a></h4>
     <div class="meta"><span class="date">${date}</span><span class="category">
-    <em class=${colorClass}><a href="#" class="line">${categories[category]}</a></em></span></div>
+    <em class=${colorClass}><a href="index.html?tag=${category}" class="line">${categories[category]}</a></em></span></div>
     </div>
     </li>
     `);
@@ -66,7 +66,7 @@ let getPopularList = () => {
 let getTagList = () => {
   for( const key of Object.keys(categories) ){
     $("#tagList").append(`
-      <li><a href="index.html?tag=${key}" class="btn btn-white">${categories[key]}</a></li>
+      <li><a href="index.html${(parseInt(key) === 0 ? "" : "?tag="+key)}" class="btn btn-white">${categories[key]}</a></li>
     `);
   }
 }

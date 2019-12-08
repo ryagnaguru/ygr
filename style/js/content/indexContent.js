@@ -14,7 +14,7 @@ let indexContent = (heading, img, date, colorClass, category, desc, article, tag
             <div class="meta"><span class="date">${date}</span>
               <span class="category">
                 <em class=${colorClass}>
-                  <a href="#" class="line">${categories[category]}</a>
+                  <a href="index.html?tag=${category}" class="line">${categories[category]}</a>
                 </em>
               </span>
             </div>
