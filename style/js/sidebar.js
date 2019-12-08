@@ -1,3 +1,4 @@
+
 let sidebar = `
 
 <!-- /.widget -->
@@ -9,33 +10,11 @@ let sidebar = `
   </form>
 </div>
 <!-- /.widget --> 
-
-
-
 <div class="sidebox widget">
   <h3 class="widget-title section-title">Popular Posts</h3>
   <ul class="post-list">
-    <li>
-      <figure class="overlay small"> <a href="blog-post.html"><img src="style/images/art/a1.jpg" alt="" /> </a> </figure>
-      <div class="post-content">
-        <h4 class="post-title"> <a href="blog-post.html">Magna Mollis Ultricies Mauris</a> </h4>
-        <div class="meta"><span class="date">12 Nov 2014</span><span class="category"><em class="red"><a href="#" class="line">Urban</a></em></span></div>
-      </div>
-    </li>
-    <li>
-      <figure class="overlay small"> <a href="blog-post.html"><img src="style/images/art/a2.jpg" alt="" /> </a> </figure>
-      <div class="post-content">
-        <h4 class="post-title"> <a href="blog-post.html">Ornare Nullam Risus Cursus</a> </h4>
-        <div class="meta"><span class="date">12 Nov 2014</span><span class="category"><em class="orange"><a href="#" class="line">Still Life</a></em></span></div>
-      </div>
-    </li>
-    <li>
-      <figure class="overlay small"> <a href="blog-post.html"><img src="style/images/art/a3.jpg" alt="" /> </a> </figure>
-      <div class="post-content">
-        <h4 class="post-title"> <a href="blog-post.html">Euismod Nullam Fusce Dapibus</a> </h4>
-        <div class="meta"><span class="date">12 Nov 2014</span><span class="category"><em class="forest"><a href="#" class="line">Conceptual</a></em></span></div>
-      </div>
-    </li>
+    <div id = "popularPost">
+    </div>
   </ul>
   <!-- /.post-list --> 
 </div>
@@ -44,14 +23,7 @@ let sidebar = `
 <div class="sidebox widget">
   <h3 class="widget-title section-title">Tags</h3>
   <ul class="tag-list">
-    <li><a href="#" class="btn btn-white">Still Life</a></li>
-    <li><a href="#" class="btn btn-white">Urban</a></li>
-    <li><a href="#" class="btn btn-white">Journal</a></li>
-    <li><a href="#" class="btn btn-white">Nature</a></li>
-    <li><a href="#" class="btn btn-white">Landscape</a></li>
-    <li><a href="#" class="btn btn-white">Macro</a></li>
-    <li><a href="#" class="btn btn-white">Workshop</a></li>
-    <li><a href="#" class="btn btn-white">Photography</a></li>
+    <div id="tagList" ></div>
   </ul>
 </div>
 <!-- /.widget -->
@@ -69,4 +41,33 @@ let sidebar = `
 
 `;
 
-document.getElementById("sideBar").innerHTML = sidebar;
+
+let init = () => {
+  document.getElementById("sideBar").innerHTML = sidebar;
+  getPopularList();
+  getTagList();
+}
+
+let getPopularList = () => {
+  for (const {heading, img, date, colorClass, category, desc, article} of articleInfos) {
+    $("#popularPost").append(`
+    <li>
+    <figure class="overlay small"> <a href=${article}><img src=${img} alt="" /> </a> </figure>
+    <div class="post-content">
+    <h4 class="post-title"> <a href=${article}>${heading}</a></h4>
+    <div class="meta"><span class="date">${date}</span><span class="category">
+    <em class=${colorClass}><a href="#" class="line">${categories[category]}</a></em></span></div>
+    </div>
+    </li>
+    `);
+  }
+}
+
+let getTagList = () => {
+  for( const key of Object.keys(categories) ){
+    $("#tagList").append(`
+      <li><a href="index.html?tag=${key}" class="btn btn-white">${categories[key]}</a></li>
+    `);
+  }
+}
+init();
